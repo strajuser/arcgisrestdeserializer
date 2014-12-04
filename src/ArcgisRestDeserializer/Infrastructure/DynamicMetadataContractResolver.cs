@@ -53,33 +53,15 @@ namespace ArcgisRestDeserializer.Infrastructure
             else
             {
                 var metadataType = _metadataDictionaty[member.DeclaringType];
-                var metadataMemberInfo = metadataType.GetMember(member.Name).First();
+                var metadataMemberInfo = metadataType.GetMember(member.Name).FirstOrDefault();
+                if (metadataMemberInfo == null)
+                    return null;
+
                 property = base.CreateProperty(metadataMemberInfo, memberSerialization);
                 property.DeclaringType = member.DeclaringType;
                 property.ValueProvider = new ReflectionValueProvider(member);
             }
             return property;
-        }
-
-        /// <summary>
-        /// Creates list of JsonProperties from metadata type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="memberSerialization"></param>
-        /// <returns></returns>
-        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
-        {
-            IList<JsonProperty> properties;
-            if (!_metadataDictionaty.ContainsKey(type))
-                properties = base.CreateProperties(type, memberSerialization);
-            else
-            {
-                var metadataType = _metadataDictionaty[type];
-                properties = base.CreateProperties(type, memberSerialization);
-                var metadataProperties = base.CreateProperties(metadataType, memberSerialization);
-                properties = properties.Where(x => metadataProperties.Select(y => y.UnderlyingName).Contains(x.UnderlyingName)).ToList();
-            }
-            return properties;
         }
     }
 }

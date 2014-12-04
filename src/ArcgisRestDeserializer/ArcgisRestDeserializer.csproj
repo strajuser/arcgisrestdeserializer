@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolver.cs" />
+    <Compile Include="Infrastructure\JsonCreationConverter.cs" />
+    <Compile Include="Metadata\Converters\FillSymbolConverter.cs" />
+    <Compile Include="Metadata\Converters\LineSymbolConverter.cs" />
+    <Compile Include="Metadata\Converters\MarkerSymbolConverter.cs" />
+    <Compile Include="Metadata\Converters\SymbolConverter.cs" />
+    <Compile Include="Metadata\Converters\SymbolConverterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

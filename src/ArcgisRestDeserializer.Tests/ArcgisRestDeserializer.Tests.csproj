@@ -74,6 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
+    <Compile Include="Metadata\Converters\FillSymbolConverterTests.cs" />
+    <Compile Include="Metadata\Converters\LineSymbolConverterTests.cs" />
+    <Compile Include="Metadata\Converters\MarkerSymbolConverterTests.cs" />
+    <Compile Include="Metadata\Converters\SymbolConverterTests.cs" />
+    <Compile Include="Metadata\Converters\SymbolConverterTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +90,7 @@
       <Name>ArcgisRestDeserializer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

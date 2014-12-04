@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using ArcgisRestDeserializer.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -25,6 +26,22 @@ namespace ArcgisRestDeserializer.Tests.Infrastructure
             Assert.AreEqual(item.Value, 5);
         }
 
+        [TestMethod]
+        public void TestContractWithoutMetadatPropertyResolve()
+        {
+            const string data = "{\"name\":\"Test Item\", \"value\":5, \"ComplexValue\":999}";
+
+            var resolver = new DynamicMetadataContractResolver();
+            resolver.RegisterTypeMetadata<ComplexItem, ItemMetadata>();
+            var item = JsonConvert.DeserializeObject<ComplexItem>(data, new JsonSerializerSettings
+            {
+                ContractResolver = resolver
+            });
+
+            Assert.IsNotNull(item);
+            Assert.AreEqual(item.ComplexValue, 10);
+        }
+
         #region | Nested Item Classes |
 
         public class Item
@@ -41,6 +58,16 @@ namespace ArcgisRestDeserializer.Tests.Infrastructure
             public string Name { get; set; }
             [DataMember(Name = "value")]
             public int Value { get; set; }
+        }
+
+        public class ComplexItem : Item
+        {
+            public ComplexItem()
+            {
+                ComplexValue = 10;
+            }
+
+            public int ComplexValue { get; set; }
         }
 
         #endregion
