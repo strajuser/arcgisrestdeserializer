@@ -69,6 +69,8 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolver.cs" />
     <Compile Include="Infrastructure\JsonCreationConverter.cs" />
+    <Compile Include="Metadata\Client\Symbols\MarkerSymbolMetadata.cs" />
+    <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadata.cs" />
     <Compile Include="Metadata\Converters\ColorToBrushJsonConverter.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverter.cs" />
     <Compile Include="Metadata\Converters\LineSymbolConverter.cs" />
@@ -82,7 +84,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Metadata\Client\Symbols\" />
     <Folder Include="Serialization\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
