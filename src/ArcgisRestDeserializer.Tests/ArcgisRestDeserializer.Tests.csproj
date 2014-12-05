@@ -74,12 +74,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
+    <Compile Include="Metadata\Converters\ColorToBrushJsonConverterTests.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverterTests.cs" />
     <Compile Include="Metadata\Converters\LineSymbolConverterTests.cs" />
     <Compile Include="Metadata\Converters\MarkerSymbolConverterTests.cs" />
     <Compile Include="Metadata\Converters\SymbolConverterTests.cs" />
     <Compile Include="Metadata\Converters\SymbolConverterTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestUtilities\ExceptionAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
