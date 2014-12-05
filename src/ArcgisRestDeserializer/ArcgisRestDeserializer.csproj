@@ -67,9 +67,14 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\ComplexPathJsonConverter.cs" />
     <Compile Include="Infrastructure\DynamicMetadataContractResolver.cs" />
     <Compile Include="Infrastructure\JsonCreationConverter.cs" />
+    <Compile Include="Metadata\Client\Symbols\FillSymbolMetadata.cs" />
+    <Compile Include="Metadata\Client\Symbols\LineSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\MarkerSymbolMetadata.cs" />
+    <Compile Include="Metadata\Client\Symbols\SimpleFillSymbolMetadata.cs" />
+    <Compile Include="Metadata\Client\Symbols\SimpleLineSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadata.cs" />
     <Compile Include="Metadata\Converters\ColorToBrushJsonConverter.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverter.cs" />

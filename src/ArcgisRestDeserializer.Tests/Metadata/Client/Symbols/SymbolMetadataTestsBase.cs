@@ -20,8 +20,12 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
         protected virtual DefaultContractResolver CreateResolver()
         {
             var resolver = new DynamicMetadataContractResolver();
-            resolver.RegisterTypeMetadata<MarkerSymbol, MarkerSymbolMetadata>();
-            resolver.RegisterTypeMetadata<SimpleMarkerSymbol, SimpleMarkerSymbolMetadata>();
+            resolver.RegisterTypeMetadata<MarkerSymbol, MarkerSymbolMetadata>()
+                .RegisterTypeMetadata<SimpleMarkerSymbol, SimpleMarkerSymbolMetadata>()
+                .RegisterTypeMetadata<LineSymbol, LineSymbolMetadata>()
+                .RegisterTypeMetadata<SimpleLineSymbol, SimpleLineSymbolMetadata>()
+                .RegisterTypeMetadata<FillSymbol, FillSymbolMetadata>()
+                .RegisterTypeMetadata<SimpleFillSymbol, SimpleFillSymbolMetadata>();
             return resolver;
         }
     }

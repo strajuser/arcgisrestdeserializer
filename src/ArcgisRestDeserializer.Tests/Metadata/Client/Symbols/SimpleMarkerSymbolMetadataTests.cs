@@ -9,7 +9,7 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
     public class SimpleMarkerSymbolMetadataTests : SymbolMetadataTestsBase
     {
         [TestMethod]
-        public void TestMarkerSymbolMetadata()
+        public void TestSimpleMarkerSymbolMetadata()
         {
             // NOTE: simple example from http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#/Symbol_Objects/02r3000000n5000000/
             const string data = @"{

@@ -74,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\FillSymbolMetadataTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\SimpleFillSymbolMetadataTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\SimpleLineSymbolMetadataTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\LineSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\MarkerSymbolsMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SymbolMetadataTestsBase.cs" />
