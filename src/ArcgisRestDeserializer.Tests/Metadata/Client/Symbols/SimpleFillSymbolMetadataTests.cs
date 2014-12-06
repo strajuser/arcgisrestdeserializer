@@ -33,7 +33,7 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
             Assert.AreEqual(fill.Color.G, 0);
             Assert.AreEqual(fill.Color.B, 255);
 
-            Assert.AreEqual(rez.BorderThickness, 1);
+            Assert.AreEqual(rez.BorderThickness, 2);
             var borderBrush = rez.BorderBrush as SolidColorBrush;
             Assert.IsNotNull(borderBrush);
             Assert.AreEqual(borderBrush.Color.A, 110);

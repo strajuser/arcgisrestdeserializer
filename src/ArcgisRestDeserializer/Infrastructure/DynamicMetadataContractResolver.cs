@@ -8,11 +8,11 @@ using Newtonsoft.Json.Serialization;
 namespace ArcgisRestDeserializer.Infrastructure
 {
     /// <summary>
-    /// Special DefaultContractResolver for Json.NET that resolve properties with metadata from another class
+    /// Special ContractResolver for Json.NET that resolve properties with metadata from another class
     /// </summary>
     public class DynamicMetadataContractResolver : DefaultContractResolver
     {
-        private readonly Dictionary<Type, Type> _metadataDictionaty = new Dictionary<Type, Type>();
+        private readonly Dictionary<Type, Type> _metadataDictionary = new Dictionary<Type, Type>();
 
         /// <summary>
         /// Register special type with metadata for json deserializing type
@@ -22,9 +22,9 @@ namespace ArcgisRestDeserializer.Infrastructure
         /// <returns></returns>
         public DynamicMetadataContractResolver RegisterTypeMetadata(Type type, Type typeMetadata)
         {
-            if (_metadataDictionaty.ContainsKey(type))
-                _metadataDictionaty[type] = typeMetadata;
-            else _metadataDictionaty.Add(type, typeMetadata);
+            if (_metadataDictionary.ContainsKey(type))
+                _metadataDictionary[type] = typeMetadata;
+            else _metadataDictionary.Add(type, typeMetadata);
             return this;
         }
 
@@ -48,19 +48,64 @@ namespace ArcgisRestDeserializer.Infrastructure
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
             JsonProperty property;
-            if (!_metadataDictionaty.ContainsKey(member.DeclaringType))
+            if (!_metadataDictionary.ContainsKey(member.DeclaringType))
                 property = base.CreateProperty(member, memberSerialization);
             else
             {
-                var metadataType = _metadataDictionaty[member.DeclaringType];
-                var metadataMemberInfo = metadataType.GetMember(member.Name).FirstOrDefault();
-                if (metadataMemberInfo == null)
+                var metadataType = _metadataDictionary[member.DeclaringType];
+                var metadataMember = metadataType.GetMember(member.Name).FirstOrDefault();
+                if (metadataMember == null)
                     return null;
 
-                property = base.CreateProperty(metadataMemberInfo, memberSerialization);
-                property.DeclaringType = member.DeclaringType;
-                property.ValueProvider = new ReflectionValueProvider(member);
+                property = CreateMetadataProperty(member, metadataMember, memberSerialization);
             }
+            return property;
+        }
+
+        /// <summary>
+        /// Creates IList of properties with extension properties from metadata
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="memberSerialization"></param>
+        /// <returns></returns>
+        protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
+        {
+            IList<JsonProperty> properties = null;
+            if (!_metadataDictionary.ContainsKey(type))
+                properties = base.CreateProperties(type, memberSerialization);
+            else
+            {
+                properties = base.CreateProperties(type, memberSerialization);
+
+                var metadataType = _metadataDictionary[type];
+                var metadataMembers = GetSerializableMembers(metadataType);
+                foreach (var member in metadataMembers.Where(x => !properties.Select(y => y.UnderlyingName).Contains(x.Name)))
+                {
+                    var property = base.CreateProperty(member, memberSerialization);
+                    property.DeclaringType = type;
+                    var attributes =
+                        Attribute.GetCustomAttributes(member, typeof(PropertyDependencyAttribute))
+                            .OfType<PropertyDependencyAttribute>();
+                    property.ValueProvider = new PropertyDependencyValueProvider(attributes);
+                    properties.Add(property);
+                }
+
+                IList<JsonProperty> orderedProperties = properties.OrderBy(p => p.Order ?? -1).ToList();
+                return orderedProperties;
+            }
+            return properties;
+        }
+
+        private JsonProperty CreateMetadataProperty(MemberInfo member, MemberInfo metadataMember, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(metadataMember, memberSerialization);
+            property.DeclaringType = member.DeclaringType;
+            var attributes =
+                Attribute.GetCustomAttributes(metadataMember, typeof(PropertyDependencyAttribute))
+                    .OfType<PropertyDependencyAttribute>();
+            property.ValueProvider = !attributes.Any()
+                ? (IValueProvider)new ReflectionValueProvider(member)
+                : new PropertyDependencyValueProvider(attributes);
             return property;
         }
     }

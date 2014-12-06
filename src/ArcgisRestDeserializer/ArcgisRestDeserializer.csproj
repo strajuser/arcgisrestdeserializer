@@ -70,6 +70,8 @@
     <Compile Include="Infrastructure\ComplexPathJsonConverter.cs" />
     <Compile Include="Infrastructure\DynamicMetadataContractResolver.cs" />
     <Compile Include="Infrastructure\JsonCreationConverter.cs" />
+    <Compile Include="Infrastructure\PropertyDependencyValueProvider.cs" />
+    <Compile Include="Infrastructure\PropertyDependencyAttribute.cs" />
     <Compile Include="Metadata\Client\Symbols\FillSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\LineSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\MarkerSymbolMetadata.cs" />

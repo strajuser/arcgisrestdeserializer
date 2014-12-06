@@ -2,6 +2,7 @@
 using System.Windows.Media;
 using ArcgisRestDeserializer.Infrastructure;
 using ArcgisRestDeserializer.Metadata.Converters;
+using ESRI.ArcGIS.Client.Symbols;
 using Newtonsoft.Json;
 
 namespace ArcgisRestDeserializer.Metadata.Client.Symbols
@@ -12,15 +13,10 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     [DataContract]
     public class FillSymbolMetadata
     {
-        // TODO
-
-        [JsonProperty("outline.color")]
-        [JsonConverter(typeof(ColorToBrushJsonConverter))]
-        public Brush BorderBrush { get; set; }
-
-        [JsonProperty("outline.width")]
-        [JsonConverter(typeof(ComplexPathJsonConverter), "outline.width")]
-        public double BorderThickness { get; set; }
+        [JsonProperty("outline")]
+        [PropertyDependency("Color", "BorderBrush")]
+        [PropertyDependency("Width", "BorderThickness")]
+        public SimpleLineSymbol Outline { get; set; }
         
         [DataMember(Name = "color")]
         [JsonConverter(typeof(ColorToBrushJsonConverter))]
