@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
 {
     [TestClass]
-    public class LineSymbolMetadataTests : SymbolMetadataTestsBase
+    public class SimpleLineSymbolMetadataTests : SymbolMetadataTestsBase
     {
         [TestMethod]
         public void TestLineSymbolMetadata()

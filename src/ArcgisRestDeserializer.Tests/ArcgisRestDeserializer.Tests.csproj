@@ -76,6 +76,8 @@
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
     <Compile Include="Infrastructure\PropertyDependencyValueProviderTests.cs" />
     <Compile Include="Metadata\Client\Symbols\FillSymbolMetadataTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\PictureFillSymbolMetadataTests.cs" />
+    <Compile Include="Metadata\Client\Symbols\PictureMarkerSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleFillSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleLineSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\LineSymbolMetadataTests.cs" />

@@ -70,7 +70,7 @@ namespace ArcgisRestDeserializer.Infrastructure
         /// <returns></returns>
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
-            IList<JsonProperty> properties = null;
+            IList<JsonProperty> properties;
             if (!_metadataDictionary.ContainsKey(type))
                 properties = base.CreateProperties(type, memberSerialization);
             else

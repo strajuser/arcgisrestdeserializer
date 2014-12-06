@@ -3,7 +3,6 @@ using ArcgisRestDeserializer.Metadata.Client.Symbols;
 using ESRI.ArcGIS.Client.Symbols;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using PictureMarkerSymbol = ESRI.ArcGIS.Client.FeatureService.Symbols.PictureMarkerSymbol;
 
 namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
 {
@@ -27,7 +26,8 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
                 .RegisterTypeMetadata<SimpleLineSymbol, SimpleLineSymbolMetadata>()
                 .RegisterTypeMetadata<FillSymbol, FillSymbolMetadata>()
                 .RegisterTypeMetadata<SimpleFillSymbol, SimpleFillSymbolMetadata>()
-                .RegisterTypeMetadata<PictureMarkerSymbol, PictureMarkerSymbolMetadata>();
+                .RegisterTypeMetadata<PictureMarkerSymbol, PictureMarkerSymbolMetadata>()
+                .RegisterTypeMetadata<PictureFillSymbol, PictureFillSymbolMetadata>();
             return resolver;
         }
     }
