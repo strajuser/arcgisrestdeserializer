@@ -11,7 +11,7 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     [DataContract]
     public class LineSymbolMetadata
     {
-        [DataMember(Name = "color")]
+        [JsonProperty("color")]
         [JsonConverter(typeof(ColorToBrushJsonConverter))]
         public Brush Color { get; set; }
 

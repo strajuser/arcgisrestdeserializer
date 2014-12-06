@@ -11,7 +11,7 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     [DataContract]
     public class SimpleLineSymbolMetadata : LineSymbolMetadata
     {
-        [DataMember(Name = "style")]
+        [JsonProperty("style")]
         [JsonConverter(typeof(PrefixEnumJsonConverter), "esriSLS")]
         public SimpleLineSymbol.LineStyle Style { get; set; }
     }

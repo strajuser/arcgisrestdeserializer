@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace ArcgisRestDeserializer.Metadata.Client.Symbols
 {
@@ -8,12 +9,12 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     [DataContract]
     public class MarkerSymbolMetadata
     {
-        [DataMember(Name = "angle")]
+        [JsonProperty("angle")]
         public double Angle { get; set; }
 
-        [DataMember(Name = "xoffset")]
+        [JsonProperty("xoffset")]
         public virtual double OffsetX { get; set; }
-        [DataMember(Name = "yoffset")]
+        [JsonProperty("yoffset")]
         public virtual double OffsetY { get; set; }
     }
 }

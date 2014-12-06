@@ -12,14 +12,14 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     [DataContract]
     public class SimpleMarkerSymbolMetadata : MarkerSymbolMetadata
     {
-        [DataMember(Name = "color")]
+        [JsonProperty("color")]
         [JsonConverter(typeof(ColorToBrushJsonConverter))]
         public Brush Color { get; set; }
 
-        [DataMember(Name = "size")]
+        [JsonProperty("size")]
         public double Size { get; set; }
 
-        [DataMember(Name = "style")]
+        [JsonProperty("style")]
         [JsonConverter(typeof(PrefixEnumJsonConverter), "esriSMS")]
         public SimpleMarkerSymbol.SimpleMarkerStyle Style { get; set; }
 

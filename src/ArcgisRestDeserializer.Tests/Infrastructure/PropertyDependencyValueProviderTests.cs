@@ -10,7 +10,7 @@ namespace ArcgisRestDeserializer.Tests.Infrastructure
         public void TestSimplePropertyDependency()
         {
             var attr = new PropertyDependencyAttribute("Name", "Title");
-            var itemSource = new ItemSource() {Name = "SimpleName"};
+            var itemSource = new ItemSource {Name = "SimpleName"};
             var item = new ItemTarget();
 
             var valueProvider = new PropertyDependencyValueProvider(new[] {attr});
