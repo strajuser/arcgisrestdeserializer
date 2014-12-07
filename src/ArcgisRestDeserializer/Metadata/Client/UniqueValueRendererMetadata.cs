@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using ArcgisRestDeserializer.Infrastructure;
 using ArcgisRestDeserializer.Metadata.Converters;
 using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Symbols;
@@ -22,8 +23,9 @@ namespace ArcgisRestDeserializer.Metadata.Client
         [JsonProperty("field1")]
         public string Field { get; set; }
         
-        // TODO:
-        // public ObservableCollection<UniqueValueInfo> Infos { get; }
+        [JsonProperty("uniqueValueInfos")]
+        [CollectionPropertyDependency("", "Infos")]
+        public UniqueValueInfo[] Infos { get; set; } 
 
         [JsonProperty("rotationExpression")]
         public string RotationExpression { get; set; }

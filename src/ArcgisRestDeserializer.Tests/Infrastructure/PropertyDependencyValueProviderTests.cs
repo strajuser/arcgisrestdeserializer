@@ -1,4 +1,5 @@
-﻿using ArcgisRestDeserializer.Infrastructure;
+﻿using System.Collections.ObjectModel;
+using ArcgisRestDeserializer.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ArcgisRestDeserializer.Tests.Infrastructure
@@ -18,6 +19,19 @@ namespace ArcgisRestDeserializer.Tests.Infrastructure
             Assert.AreEqual(item.Title, itemSource.Name);
         }
 
+        [TestMethod]
+        public void TestReadonlyCollectonPropertyDependency()
+        {
+            var attr = new CollectionPropertyDependencyAttribute("", "Collection");
+            var item = new ItemTarget();
+
+            var valueProvider = new PropertyDependencyValueProvider(new[] { attr });
+            valueProvider.SetValue(item, new[] { "1", "2" });
+            Assert.AreEqual(item.Collection.Count, 2);
+            Assert.AreEqual(item.Collection[0], "1");
+            Assert.AreEqual(item.Collection[1], "2");
+        }
+
         #region | Nested Classes |
 
         public class ItemSource 
@@ -28,6 +42,12 @@ namespace ArcgisRestDeserializer.Tests.Infrastructure
         public class ItemTarget
         {
             public string Title { get; set; }
+
+            private readonly ObservableCollection<string> _collection = new ObservableCollection<string>();
+            public ObservableCollection<string> Collection
+            {
+                get { return _collection; }
+            }
         }
 
         #endregion

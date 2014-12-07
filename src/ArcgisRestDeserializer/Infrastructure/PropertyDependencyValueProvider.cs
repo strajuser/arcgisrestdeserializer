@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Newtonsoft.Json.Serialization;
 
 namespace ArcgisRestDeserializer.Infrastructure
@@ -21,13 +24,68 @@ namespace ArcgisRestDeserializer.Infrastructure
             foreach (var attribute in _attributes)
             {
                 var member = target.GetType().GetMember(attribute.Property).FirstOrDefault();
-                var valueMember = value.GetType().GetProperty(attribute.Path);
-                if (member == null || valueMember == null)
+                if (member == null)
                     continue;
 
-                var valueProvider = new ReflectionValueProvider(member);
-                valueProvider.SetValue(target, valueMember.GetValue(value, null));
+                value = TryGetValue(attribute, value);
+                if (attribute is CollectionPropertyDependencyAttribute)
+                    TrySetCollection(member, target, value);
+                else
+                    TrySetValue(member, target, value);
             }
+        }
+
+        /// <summary>
+        /// Try to get value from <paramref name="value" /> with Path from Attribute 
+        /// </summary>
+        /// <param name="attribute"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private object TryGetValue(PropertyDependencyAttribute attribute, object value)
+        {
+            if (String.IsNullOrEmpty(attribute.Path))
+                return value;
+
+            var valueMember = value.GetType().GetProperty(attribute.Path);
+            if (valueMember == null)
+                return value;
+
+            return valueMember.GetValue(value, null);
+        }
+
+        /// <summary>
+        /// Try to set collection from value
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="target"></param>
+        /// <param name="value"></param>
+        private void TrySetCollection(MemberInfo member, object target, object value)
+        {
+            var prop = member as PropertyInfo;
+            if (prop == null)
+                return;
+
+            var list = prop.GetValue(target, null) as IList;
+            if (list == null)
+                return;
+
+            var items = value as IEnumerable;
+            if (items != null)
+                foreach (var item in items)
+                    list.Add(item);
+            else list.Add(value);
+        }
+
+        /// <summary>
+        /// Try to set value
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="target"></param>
+        /// <param name="value"></param>
+        private void TrySetValue(MemberInfo member, object target, object value)
+        {
+            var valueProvider = new ReflectionValueProvider(member);
+            valueProvider.SetValue(target, value);
         }
 
         public object GetValue(object target)

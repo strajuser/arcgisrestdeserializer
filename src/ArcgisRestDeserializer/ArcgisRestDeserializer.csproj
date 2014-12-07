@@ -67,6 +67,7 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\CollectionPropertyDependency.cs" />
     <Compile Include="Infrastructure\DynamicMetadataContractResolver.cs" />
     <Compile Include="Infrastructure\JsonCreationConverter.cs" />
     <Compile Include="Infrastructure\PropertyDependencyValueProvider.cs" />

@@ -71,10 +71,10 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client
             Assert.AreEqual(defaultSymbol.Width, 1);
 
             Assert.AreEqual(rez.Infos.Count, 2);
-            Assert.AreEqual(rez.Infos[0].Value, (long)1);
+            Assert.AreEqual(rez.Infos[0].Value, "1");
             Assert.AreEqual(rez.Infos[0].Description, "Duct Bank description");
-            Assert.AreEqual(rez.Infos[1].Value, (long)2);
-            Assert.AreEqual(rez.Infos[2].Description, "Trench description");
+            Assert.AreEqual(rez.Infos[1].Value, "2");
+            Assert.AreEqual(rez.Infos[1].Description, "Trench description");
         }
 
         protected override DynamicMetadataContractResolver CreateResolver()
