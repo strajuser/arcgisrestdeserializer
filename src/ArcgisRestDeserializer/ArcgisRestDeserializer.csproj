@@ -71,6 +71,7 @@
     <Compile Include="Infrastructure\JsonCreationConverter.cs" />
     <Compile Include="Infrastructure\PropertyDependencyValueProvider.cs" />
     <Compile Include="Infrastructure\PropertyDependencyAttribute.cs" />
+    <Compile Include="Metadata\Client\RendererInfoMetadata.cs" />
     <Compile Include="Metadata\Client\SimpleRendererMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\FillSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\LineSymbolMetadata.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="Metadata\Client\Symbols\SimpleFillSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleLineSymbolMetadata.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadata.cs" />
+    <Compile Include="Metadata\Client\UniqueValueInfoMetadata.cs" />
+    <Compile Include="Metadata\Client\UniqueValueRendererMetadata.cs" />
     <Compile Include="Metadata\Converters\Base64ToImageJsonConverter.cs" />
     <Compile Include="Metadata\Converters\ColorToBrushJsonConverter.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverter.cs" />

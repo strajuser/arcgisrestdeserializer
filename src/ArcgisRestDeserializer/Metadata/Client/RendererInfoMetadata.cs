@@ -1,16 +1,15 @@
 ﻿using System.Runtime.Serialization;
 using ArcgisRestDeserializer.Metadata.Converters;
-using ESRI.ArcGIS.Client;
 using ESRI.ArcGIS.Client.Symbols;
 using Newtonsoft.Json;
 
 namespace ArcgisRestDeserializer.Metadata.Client
 {
     /// <summary>
-    /// Metadata for class ESRI.ArcGIS.Client.SimpleRenderer
+    /// Metadata for class ESRI.ArcGIS.Client.RendererInfo
     /// </summary>
     [DataContract]
-    public class SimpleRendererMetadata
+    public class RendererInfoMetadata
     {
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -18,14 +17,8 @@ namespace ArcgisRestDeserializer.Metadata.Client
         [JsonProperty("label")]
         public string Label { get; set; }
 
-        [JsonProperty("rotationExpression")]
-        public string RotationExpression { get; set; }
-
-        [JsonProperty("rotationType")]
-        public SymbolRotationType RotationType { get; set; }
-
         [JsonProperty("symbol")]
         [JsonConverter(typeof(SymbolConverter))]
-        public Symbol Symbol { get; set; }
+        public Symbol Symbol { get; set; } 
     }
 }

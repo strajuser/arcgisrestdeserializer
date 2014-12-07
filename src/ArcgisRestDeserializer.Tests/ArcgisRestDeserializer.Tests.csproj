@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
     <Compile Include="Infrastructure\PropertyDependencyValueProviderTests.cs" />
+    <Compile Include="Metadata\Client\RendererInfoMetadataTests.cs" />
     <Compile Include="Metadata\Client\SimpleRendererMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\FillSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\PictureFillSymbolMetadataTests.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="Metadata\Client\Symbols\MarkerSymbolsMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SymbolMetadataTestsBase.cs" />
+    <Compile Include="Metadata\Client\UniqueValueInfoMetadataTests.cs" />
+    <Compile Include="Metadata\Client\UniqueValueRendererMetadataTests.cs" />
     <Compile Include="Metadata\Converters\ColorToBrushJsonConverterTests.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverterTests.cs" />
     <Compile Include="Metadata\Converters\LineSymbolConverterTests.cs" />
