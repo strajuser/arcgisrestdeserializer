@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DynamicMetadataContractResolverTests.cs" />
     <Compile Include="Infrastructure\PropertyDependencyValueProviderTests.cs" />
+    <Compile Include="Metadata\Client\SimpleRendererMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\FillSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\PictureFillSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\PictureMarkerSymbolMetadataTests.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Metadata\Converters\SymbolConverterTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestUtilities\ExceptionAssert.cs" />
+    <Compile Include="TestUtilities\MetadataTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

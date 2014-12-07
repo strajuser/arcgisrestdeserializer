@@ -19,14 +19,18 @@ namespace ArcgisRestDeserializer.Metadata.Converters
         /// </summary>
         public bool IgnoreCase { get; set; }
 
-        public PrefixEnumJsonConverter(string prefix = null, bool ignoreCase = false) : this(prefix)
+        public PrefixEnumJsonConverter(string prefix, bool ignoreCase)
         {
+            Prefix = prefix;
             IgnoreCase = ignoreCase;
         }
 
-        public PrefixEnumJsonConverter(string prefix = null)
+        public PrefixEnumJsonConverter(string prefix) : this(prefix, true)
         {
-            Prefix = prefix;
+        }
+
+        public PrefixEnumJsonConverter() : this(null, true)
+        {
         }
 
         public override bool CanConvert(Type objectType)
@@ -36,8 +40,15 @@ namespace ArcgisRestDeserializer.Metadata.Converters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var prop = serializer.Deserialize<JValue>(reader);
-            return Enum.Parse(objectType, prop.Value<string>().Replace(Prefix, ""), IgnoreCase);
+            try
+            {
+                var prop = serializer.Deserialize<JValue>(reader);
+                return Enum.Parse(objectType, prop.Value<string>().Replace(Prefix, ""), IgnoreCase);
+            }
+            catch (Exception ex)
+            {
+                throw new JsonSerializationException("PrefixEnumJsonConverter can't convert Enum", ex);
+            }
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

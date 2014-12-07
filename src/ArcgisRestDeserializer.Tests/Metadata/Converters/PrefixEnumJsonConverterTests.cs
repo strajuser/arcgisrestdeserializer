@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using ArcgisRestDeserializer.Metadata.Converters;
+using ArcgisRestDeserializer.Tests.TestUtilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
@@ -21,11 +22,15 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Converters
         }
 
         [TestMethod]
-        public void TestIgnoreCase()
+        public void TestNotIgnoreCase()
         {
             var data = "{\"Value\":\"esrivalue2\"}";
-            var rez = JsonConvert.DeserializeObject<Item>(data, new PrefixEnumJsonConverter("esri", true));
+            var rez = JsonConvert.DeserializeObject<Item>(data, new PrefixEnumJsonConverter("esri"));
             Assert.AreEqual(rez.Value, TestEnum.Value2);
+
+            data = "{\"Value\":\"esrivalue2\"}";
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Item>(data, new PrefixEnumJsonConverter("esri", false)));
         }
 
         #region | Nested Classes |

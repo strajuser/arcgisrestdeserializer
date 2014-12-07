@@ -1,26 +1,16 @@
 ﻿using ArcgisRestDeserializer.Infrastructure;
 using ArcgisRestDeserializer.Metadata.Client.Symbols;
+using ArcgisRestDeserializer.Tests.TestUtilities;
 using ESRI.ArcGIS.Client.Symbols;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
 {
-    public abstract class SymbolMetadataTestsBase
+    public abstract class SymbolMetadataTestsBase : MetadataTestBase
     {
-        protected JsonSerializerSettings CreateSettings(params JsonConverter[] converters)
+        protected override DynamicMetadataContractResolver CreateResolver()
         {
-            return new JsonSerializerSettings
-            {
-                Converters = converters,
-                ContractResolver = CreateResolver()
-            };
-        }
-
-        protected virtual DefaultContractResolver CreateResolver()
-        {
-            var resolver = new DynamicMetadataContractResolver();
-            resolver.RegisterTypeMetadata<MarkerSymbol, MarkerSymbolMetadata>()
+            return base.CreateResolver()
+                .RegisterTypeMetadata<MarkerSymbol, MarkerSymbolMetadata>()
                 .RegisterTypeMetadata<SimpleMarkerSymbol, SimpleMarkerSymbolMetadata>()
                 .RegisterTypeMetadata<LineSymbol, LineSymbolMetadata>()
                 .RegisterTypeMetadata<SimpleLineSymbol, SimpleLineSymbolMetadata>()
@@ -28,7 +18,6 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
                 .RegisterTypeMetadata<SimpleFillSymbol, SimpleFillSymbolMetadata>()
                 .RegisterTypeMetadata<PictureMarkerSymbol, PictureMarkerSymbolMetadata>()
                 .RegisterTypeMetadata<PictureFillSymbol, PictureFillSymbolMetadata>();
-            return resolver;
         }
     }
 }
