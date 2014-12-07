@@ -14,25 +14,9 @@ namespace ArcgisRestDeserializer.Metadata.Client.Symbols
     public class FillSymbolMetadata
     {
         [JsonProperty("outline")]
-        [PropertyDependency("Color", "BorderBrush")]
-        [PropertyDependency("Width", "BorderThickness")]
+        [PropertyDependency("BorderBrush", "Color")]
+        [PropertyDependency("BorderThickness", "Width")]
         public SimpleLineSymbol Outline { get; set; }
-
-        /* TODO
-         * [PropertyDependency<FillSymbol, SimpleLineSymbol>(
-         *      x => x.BorderBrush,
-         *      x => x.Color
-         * )]
-         */
-
-        /*
-         * [PropertyDependency<FillSymbol, JObject>(
-         *      x => x.BorderThickness,
-         *      x => x["width"].Value<int>()
-         * )] 
-         * public JObject Outline { get; set; }
-         * 
-         */
 
         [JsonProperty("color")]
         [JsonConverter(typeof(ColorToBrushJsonConverter))]

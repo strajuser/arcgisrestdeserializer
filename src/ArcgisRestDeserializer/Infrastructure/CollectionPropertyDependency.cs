@@ -7,7 +7,7 @@ namespace ArcgisRestDeserializer.Infrastructure
     /// </summary>
     public class CollectionPropertyDependencyAttribute : PropertyDependencyAttribute
     {
-        public CollectionPropertyDependencyAttribute(string path, string property) : base(path, property)
+        public CollectionPropertyDependencyAttribute(string property, string path = null) : base(property, path)
         {
         }
     }

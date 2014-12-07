@@ -12,7 +12,11 @@ namespace ArcgisRestDeserializer.Infrastructure
         public string Property { get; set; }
         public string Path { get; set; }
 
-        public PropertyDependencyAttribute(string path, string property)
+        public PropertyDependencyAttribute(string property) : this(property, null)
+        {
+        }
+
+        public PropertyDependencyAttribute(string property, string path)
         {
             Path = path;
             Property = property;

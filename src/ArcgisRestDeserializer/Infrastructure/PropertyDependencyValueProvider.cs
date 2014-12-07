@@ -21,13 +21,14 @@ namespace ArcgisRestDeserializer.Infrastructure
 
         public void SetValue(object target, object value)
         {
+            var valueSource = value;
             foreach (var attribute in _attributes)
             {
                 var member = target.GetType().GetMember(attribute.Property).FirstOrDefault();
                 if (member == null)
                     continue;
 
-                value = TryGetValue(attribute, value);
+                value = TryGetValue(attribute, valueSource);
                 if (attribute is CollectionPropertyDependencyAttribute)
                     TrySetCollection(member, target, value);
                 else
@@ -54,7 +55,7 @@ namespace ArcgisRestDeserializer.Infrastructure
         }
 
         /// <summary>
-        /// Try to set collection from value
+        /// Try to fill collection
         /// </summary>
         /// <param name="member"></param>
         /// <param name="target"></param>
@@ -77,7 +78,7 @@ namespace ArcgisRestDeserializer.Infrastructure
         }
 
         /// <summary>
-        /// Try to set value
+        /// Try to set simple value
         /// </summary>
         /// <param name="member"></param>
         /// <param name="target"></param>

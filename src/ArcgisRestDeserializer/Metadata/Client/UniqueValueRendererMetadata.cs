@@ -24,7 +24,7 @@ namespace ArcgisRestDeserializer.Metadata.Client
         public string Field { get; set; }
         
         [JsonProperty("uniqueValueInfos")]
-        [CollectionPropertyDependency("", "Infos")]
+        [CollectionPropertyDependency("Infos")]
         public UniqueValueInfo[] Infos { get; set; } 
 
         [JsonProperty("rotationExpression")]
