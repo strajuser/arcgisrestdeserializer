@@ -5,7 +5,7 @@ using ESRI.ArcGIS.Client.Symbols;
 
 namespace ArcgisRestDeserializer.Tests.Metadata.Client.Symbols
 {
-    public abstract class SymbolMetadataTestsBase : MetadataTestBase
+    public abstract class SymbolMetadataTestsBase : MetadataTestsBase
     {
         protected override DynamicMetadataContractResolver CreateResolver()
         {

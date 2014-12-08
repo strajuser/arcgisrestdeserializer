@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace ArcgisRestDeserializer.Tests.Metadata.Client
 {
     [TestClass]
-    public class RendererInfoMetadataTests : MetadataTestBase
+    public class RendererInfoMetadataTestses : MetadataTestsBase
     {
         [TestMethod]
         public void TestRendererInfoMetadata()

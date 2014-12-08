@@ -87,6 +87,8 @@
     <Compile Include="Metadata\Client\Symbols\SimpleMarkerSymbolMetadataTests.cs" />
     <Compile Include="Metadata\Client\Symbols\SymbolMetadataTestsBase.cs" />
     <Compile Include="Metadata\Client\UniqueValueInfoMetadataTests.cs" />
+    <Compile Include="Metadata\Client\UniqueValueMultipleFieldsInfoMetadataTests.cs" />
+    <Compile Include="Metadata\Client\UniqueValueMultipleFieldsRendererMetadataTests.cs" />
     <Compile Include="Metadata\Client\UniqueValueRendererMetadataTests.cs" />
     <Compile Include="Metadata\Converters\ColorToBrushJsonConverterTests.cs" />
     <Compile Include="Metadata\Converters\FillSymbolConverterTests.cs" />

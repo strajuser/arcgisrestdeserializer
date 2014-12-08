@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace ArcgisRestDeserializer.Infrastructure
+﻿namespace ArcgisRestDeserializer.Infrastructure
 {
     /// <summary>
-    /// Attribute for fillind dependent collections in seriazlization
+    /// Attribute for filling dependent collections during serialization
     /// </summary>
     public class CollectionPropertyDependencyAttribute : PropertyDependencyAttribute
     {

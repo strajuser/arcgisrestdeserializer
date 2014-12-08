@@ -1,10 +1,9 @@
 ﻿using ArcgisRestDeserializer.Infrastructure;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace ArcgisRestDeserializer.Tests.TestUtilities
 {
-    public abstract class MetadataTestBase
+    public abstract class MetadataTestsBase
     {
         protected virtual JsonSerializerSettings CreateSettings(params JsonConverter[] converters)
         {

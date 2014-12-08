@@ -10,16 +10,15 @@ using Newtonsoft.Json;
 namespace ArcgisRestDeserializer.Tests.Metadata.Client
 {
     [TestClass]
-    public class UniqueValueRendererMetadataTestses : MetadataTestsBase
+    public class UniqueValueMultipleFieldsRendererMetadataTests : MetadataTestsBase
     {
         [TestMethod]
-        public void TestUniqueValueRendererMetadata()
+        public void TestUniqueValueMultipleFieldsRendererMetadata()
         {
-            // example from http://resources.arcgis.com/en/help/arcgis-rest-api/index.html#/Renderer_objects/02r30000019t000000/
             const string data = @"{
       ""type"" : ""uniqueValue"", 
       ""field1"" : ""SubtypeCD"", 
-      ""field2"" : null, 
+      ""field2"" : ""SomeAnotherField"", 
       ""field3"" : null, 
       ""fieldDelimiter"" : "", "", 
       ""defaultSymbol"" : 
@@ -32,7 +31,7 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client
       ""defaultLabel"" : ""\u003cOther values\u003e"", 
       ""uniqueValueInfos"" : [
         {
-          ""value"" : ""1"", 
+          ""value"" : ""1,2"", 
           ""label"" : ""Duct Bank"", 
           ""description"" : ""Duct Bank description"", 
           ""symbol"" : 
@@ -44,7 +43,7 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client
           }
         }, 
         {
-          ""value"" : ""2"", 
+          ""value"" : ""2,3"", 
           ""label"" : ""Trench"", 
           ""description"" : ""Trench description"", 
           ""symbol"" : 
@@ -59,11 +58,15 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client
       ""rotationType"": ""geographic"",
       ""rotationExpression"": ""[Rotation] * 2""
 }";
-            var rez = JsonConvert.DeserializeObject<UniqueValueRenderer>(data, CreateSettings());
+
+            var rez = JsonConvert.DeserializeObject<UniqueValueMultipleFieldsRenderer>(data, CreateSettings());
 
             Assert.IsNotNull(rez);
             Assert.AreEqual(rez.DefaultLabel, "\u003cOther values\u003e");
-            Assert.AreEqual(rez.Field, "SubtypeCD");
+            Assert.IsNotNull(rez.Fields);
+            Assert.AreEqual(rez.Fields.Length, 2);
+            Assert.AreEqual(rez.Fields[0], "SubtypeCD");
+            Assert.AreEqual(rez.Fields[1], "SomeAnotherField");
 
             var defaultSymbol = rez.DefaultSymbol as SimpleLineSymbol;
             Assert.IsNotNull(defaultSymbol);
@@ -71,19 +74,24 @@ namespace ArcgisRestDeserializer.Tests.Metadata.Client
             Assert.AreEqual(defaultSymbol.Width, 1);
 
             Assert.AreEqual(rez.Infos.Count, 2);
-            Assert.AreEqual(rez.Infos[0].Value, "1");
+            Assert.AreEqual(rez.Infos[0].Values.Length, 2);
+            Assert.AreEqual(rez.Infos[0].Values[0], "1");
+            Assert.AreEqual(rez.Infos[0].Values[1], "2");
             Assert.AreEqual(rez.Infos[0].Description, "Duct Bank description");
-            Assert.AreEqual(rez.Infos[1].Value, "2");
+            Assert.AreEqual(rez.Infos[1].Values.Length, 2);
+            Assert.AreEqual(rez.Infos[1].Values[0], "2");
+            Assert.AreEqual(rez.Infos[1].Values[1], "3");
             Assert.AreEqual(rez.Infos[1].Description, "Trench description");
         }
 
         protected override DynamicMetadataContractResolver CreateResolver()
         {
             return base.CreateResolver()
-                .RegisterTypeMetadata<UniqueValueRenderer, UniqueValueRendererMetadata>()
                 .RegisterTypeMetadata<RendererInfo, RendererInfoMetadata>()
+                .RegisterTypeMetadata<UniqueValueMultipleFieldsInfo, UniqueValueMultipleFieldsInfoMetadata>()
+                .RegisterTypeMetadata<UniqueValueMultipleFieldsRenderer, UniqueValueMultipleFieldsRendererMetadata>()
                 .RegisterTypeMetadata<SimpleLineSymbol, SimpleLineSymbolMetadata>()
-                .RegisterTypeMetadata<LineSymbol, LineSymbolMetadata>(); 
+                .RegisterTypeMetadata<LineSymbol, LineSymbolMetadata>();
         }
     }
 }
